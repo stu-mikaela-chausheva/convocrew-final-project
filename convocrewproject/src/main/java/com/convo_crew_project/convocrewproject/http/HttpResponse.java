@@ -35,10 +35,10 @@ public class HttpResponse {
 //    }
 //
 //
-//    public HttpResponse withData(Object data) {
-//        response.put("data", data);
-//        return this;
-//    }
+    public HttpResponse withData(Object data) {
+        response.put("data", data);
+        return this;
+    }
 
     public ResponseEntity<Object> build() {
 

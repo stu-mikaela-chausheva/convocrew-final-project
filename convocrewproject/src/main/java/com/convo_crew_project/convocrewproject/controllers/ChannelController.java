@@ -7,9 +7,11 @@ import com.convo_crew_project.convocrewproject.services.ChannelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Controller
@@ -41,5 +43,14 @@ public class ChannelController {
 
         response.put("message", "Channel not created");
         return new ResponseEntity<Object>(response, HttpStatus.valueOf(400 ));
+    }
+
+    @GetMapping("/channels")
+    public ResponseEntity fetchAllChannels() {
+        ArrayList<Channel> collection = (ArrayList<Channel>) this.channelService.getAllChannels();
+
+        return HttpResponse.success()
+                .withData(collection)
+                .build();
     }
 }
