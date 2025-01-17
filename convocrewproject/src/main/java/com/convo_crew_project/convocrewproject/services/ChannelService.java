@@ -1,9 +1,7 @@
 package com.convo_crew_project.convocrewproject.services;
 
-import com.convo_crew_project.convocrewproject.entites.Channel;
+import com.convo_crew_project.convocrewproject.entities.Channel;
 import com.convo_crew_project.convocrewproject.repositories.ChannelRepository;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +21,10 @@ public class ChannelService {
 
     public List<Channel> getAllChannels() {
         return channelRepository.findAllByIsPrivateFalse();
+    }
+
+    public Channel getChannelById(Long id) {
+        return channelRepository.findById(id).orElse(null);
     }
 
 }

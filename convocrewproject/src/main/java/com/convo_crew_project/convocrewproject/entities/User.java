@@ -1,4 +1,4 @@
-package com.convo_crew_project.convocrewproject.entites;
+package com.convo_crew_project.convocrewproject.entities;
 
 import jakarta.persistence.*;
 

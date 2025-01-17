@@ -1,7 +1,6 @@
 package com.convo_crew_project.convocrewproject.controllers;
 
-import com.convo_crew_project.convocrewproject.entites.Channel;
-import com.convo_crew_project.convocrewproject.entites.User;
+import com.convo_crew_project.convocrewproject.entities.User;
 import com.convo_crew_project.convocrewproject.http.HttpResponse;
 import com.convo_crew_project.convocrewproject.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @Controller
 public class UserController {

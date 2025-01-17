@@ -1,7 +1,6 @@
 package com.convo_crew_project.convocrewproject.controllers;
 
-import com.convo_crew_project.convocrewproject.entites.Channel;
-import com.convo_crew_project.convocrewproject.entites.User;
+import com.convo_crew_project.convocrewproject.entities.Channel;
 import com.convo_crew_project.convocrewproject.http.HttpResponse;
 import com.convo_crew_project.convocrewproject.services.ChannelService;
 import org.springframework.http.HttpStatus;
