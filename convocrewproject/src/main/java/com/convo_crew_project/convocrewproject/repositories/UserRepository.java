@@ -5,33 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-//
-//    private JdbcTemplate db;
-//
-//    // Dependecy injection
-//    public UserRepository(JdbcTemplate db) {
-//        this.db = db;
-//    }
-//
-//    public boolean create(User user) {
-//
-//        StringBuilder sql = new StringBuilder();
-//
-//
-//        sql.append("INSERT INTO td_users")
-//                .append("(username, email, password_hash)")
-//                .append("VALUES")
-//                .append("('")
-//                .append(user.getUsername())
-//                .append("', '")
-//                .append(user.getEmail())
-//                .append("', '")
-//                .append(user.getPassword())
-//                .append("')");
-//
-//        this.db.execute(sql.toString());
-//        return true;
-//    }
+    List<User> findAll();
 }

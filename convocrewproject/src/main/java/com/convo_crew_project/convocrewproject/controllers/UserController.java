@@ -1,13 +1,16 @@
 package com.convo_crew_project.convocrewproject.controllers;
 
+import com.convo_crew_project.convocrewproject.entites.Channel;
 import com.convo_crew_project.convocrewproject.entites.User;
 import com.convo_crew_project.convocrewproject.http.HttpResponse;
 import com.convo_crew_project.convocrewproject.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Controller
@@ -41,5 +44,14 @@ public class UserController {
                 .withMessage("User not created")
                 .build();
 
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity fetchAllUsers() {
+        ArrayList<User> collection = (ArrayList<User>) this.userService.getAllUsers();
+
+        return HttpResponse.success()
+                .withData(collection)
+                .build();
     }
 }

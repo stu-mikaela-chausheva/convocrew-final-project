@@ -18,6 +18,9 @@ public class User {
     @Column(name="password_hash")
     private String password;
 
+    @Column(name="is_active")
+    private boolean isActive;
+
     public int getId() {
         return id;
     }
@@ -48,5 +51,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }
