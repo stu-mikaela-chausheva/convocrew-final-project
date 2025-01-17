@@ -1,8 +1,19 @@
 package com.convo_crew_project.convocrewproject.entites;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="td_channel")
 public class Channel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name="name")
     private String name;
+
+    @Column(name="is_private")
+    private boolean isPrivate;
 
     public int getId() {
         return id;
@@ -18,5 +29,13 @@ public class Channel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean isPrivate) {
+        this.isPrivate = isPrivate;
     }
 }

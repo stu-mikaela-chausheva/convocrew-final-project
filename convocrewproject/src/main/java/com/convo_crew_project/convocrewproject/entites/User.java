@@ -1,10 +1,21 @@
 package com.convo_crew_project.convocrewproject.entites;
 
+import jakarta.persistence.*;
 
+@Entity
+@Table(name="td_users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name="username")
     private String username;
+
+    @Column(name="email")
     private String email;
+
+    @Column(name="password_hash")
     private String password;
 
     public int getId() {

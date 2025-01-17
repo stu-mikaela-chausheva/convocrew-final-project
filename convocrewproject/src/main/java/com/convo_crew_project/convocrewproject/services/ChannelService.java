@@ -17,11 +17,12 @@ public class ChannelService {
     }
 
     public boolean createChannel(Channel channel) {
-       return this.channelRepository.create(channel);
+        channelRepository.save(channel); // Persist the channel in the database
+        return true;
     }
 
     public List<Channel> getAllChannels() {
-        return this.channelRepository.fetchAll();
+        return channelRepository.findAllByIsPrivateFalse();
     }
 
 }

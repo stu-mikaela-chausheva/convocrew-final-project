@@ -15,6 +15,8 @@ public class UserService {
     }
 
     public boolean createUser(User user) {
-        return this.userRepository.create(user);
+//        return this.userRepository.create(user);
+        userRepository.save(user); // Persist the channel in the database
+        return true;
     }
 }
