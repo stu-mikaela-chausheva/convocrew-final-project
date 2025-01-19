@@ -25,7 +25,7 @@ public class MessageController {
     }
 
 
-    @PostMapping("/post/message")
+    @PostMapping("/message/post")
     public ResponseEntity<?> sendMessage(@RequestBody Message message) {
 
         if (message.getTextMessage() == null || message.getTextMessage().isEmpty()) {
@@ -47,7 +47,7 @@ public class MessageController {
 
     }
 
-    @GetMapping("/messages/{channelid}")
+    @GetMapping("/message/{channelid}")
     public ResponseEntity fetchMessageByChannelID(@PathVariable("channelid") Long channelId) {
         Channel channel = channelService.getChannelById(channelId);
 

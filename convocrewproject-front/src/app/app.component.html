@@ -11,30 +11,21 @@
   <div class="column channel-list">
   @for(channelElement of channelCollection; track channelElement ) {
     <ul>
-      <li>{{ channelElement.name }}</li>
+      <li >{{ channelElement.name }}</li>
     </ul>
 
   }
 
 </div>
 
-    <div class="column channel-list">
+    <!-- <div class="column channel-list">
         <ul>
             <li onclick="viewChannel('Channel 1')">Channel 1</li>
             <li onclick="viewChannel('Channel 2')">Channel 2</li>
             <li onclick="viewChannel('Channel 3')">Channel 3</li>
             <li onclick="viewChannel('Channel 4')">Channel 4</li>
         </ul>
-    </div>
-
-
-
-
-
-
-
-
-
+    </div> -->
 
 
     <div class="column message-viewer" id="message-viewer">
@@ -43,7 +34,10 @@
         </div>
     </div>
 
-    <script>
+
+
+
+    <!-- <script>
         function viewChannel(channelName) {
             const messageViewer = document.getElementById('message-viewer');
             messageViewer.innerHTML = `
@@ -55,6 +49,6 @@
                 </div>
             `;
         }
-    </script>
+    </script> -->
 </body>
 </html>
