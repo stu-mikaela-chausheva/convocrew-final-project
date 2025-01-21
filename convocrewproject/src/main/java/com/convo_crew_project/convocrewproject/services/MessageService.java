@@ -16,7 +16,7 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
-    public boolean addMessage(Message message) {
+    public boolean create(Message message) {
         messageRepository.save(message);
         return true;
     }

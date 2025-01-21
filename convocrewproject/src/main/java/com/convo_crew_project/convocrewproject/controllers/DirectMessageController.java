@@ -38,20 +38,6 @@ public class DirectMessageController {
                     .build();
         }
 
-        // Verify sender and receiver exist in the database
-//        User sender = userService.getUserById(directMessage.getSender().getId()).orElse(null);
-//        User receiver = userService.getUserById(directMessage.getReceiver().getId()).orElse(null);
-//
-//        if (sender == null || receiver == null) {
-//            return HttpResponse.error()
-//                    .withMessage("Sender or receiver not found")
-//                    .build();
-//        }
-
-        // Set verified sender and receiver
-//        directMessage.setSender(sender);
-//        directMessage.setReceiver(receiver);
-
         // Persist the direct message
         if (this.directMessageService.create(directMessage)) {
             return HttpResponse.success()

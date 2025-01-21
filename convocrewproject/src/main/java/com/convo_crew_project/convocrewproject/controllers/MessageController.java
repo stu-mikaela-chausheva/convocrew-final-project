@@ -2,7 +2,6 @@ package com.convo_crew_project.convocrewproject.controllers;
 
 import com.convo_crew_project.convocrewproject.entities.Channel;
 import com.convo_crew_project.convocrewproject.entities.Message;
-import com.convo_crew_project.convocrewproject.entities.User;
 import com.convo_crew_project.convocrewproject.http.HttpResponse;
 import com.convo_crew_project.convocrewproject.services.ChannelService;
 import com.convo_crew_project.convocrewproject.services.MessageService;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,7 +23,7 @@ public class MessageController {
     }
 
 
-    @PostMapping("/message/post")
+    @PostMapping("/post/message")
     public ResponseEntity<?> sendMessage(@RequestBody Message message) {
 
         if (message.getTextMessage() == null || message.getTextMessage().isEmpty()) {
@@ -34,7 +32,21 @@ public class MessageController {
                     .build();
         }
 
-        if(this.messageService.addMessage(message)) {
+        // Validate channel
+        if (message.getChannel() == null || message.getChannel().getId() == 0) {
+            return HttpResponse.error()
+                    .withMessage("Channel ID must be provided")
+                    .build();
+        }
+
+        // Validate user
+        if (message.getUser() == null || message.getUser().getId() == 0) {
+            return HttpResponse.error()
+                    .withMessage("User ID must be provided")
+                    .build();
+        }
+
+        if(this.messageService.create(message)) {
 
             return HttpResponse.success()
                     .withMessage("Sent")
@@ -47,7 +59,7 @@ public class MessageController {
 
     }
 
-    @GetMapping("/message/{channelid}")
+    @GetMapping("/messages/{channelid}")
     public ResponseEntity fetchMessageByChannelID(@PathVariable("channelid") Long channelId) {
         Channel channel = channelService.getChannelById(channelId);
 
