@@ -3,7 +3,7 @@ package com.convo_crew_project.convocrewproject.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="td_channel")
+@Table(name="td_channels")
 public class Channel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
