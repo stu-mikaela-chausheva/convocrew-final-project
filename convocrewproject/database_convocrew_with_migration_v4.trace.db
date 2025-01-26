@@ -683,3 +683,13 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:1570)
+2025-01-26 13:13:07.225856+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TR_USER_CHANNEL_ROLE" not found; SQL statement:
+select * from tr_user_channel_role [42102-232]
+2025-01-26 13:14:16.155988+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FROMTR_USER_CHANNEL_ROLES" not found; SQL statement:
+DELETE FROMtr_user_channel_roles
+WHERE id=4 [42102-232]
+2025-01-26 14:27:41.693676+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TR_USERS_CHANNELS_ROLES" not found; SQL statement:
+select * from tr_users_channels_roles [42102-232]

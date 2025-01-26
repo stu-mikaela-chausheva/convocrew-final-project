@@ -24,4 +24,5 @@ public class MessageService {
     public List<Message> getAllMessagesByChannel(Channel channel) {
         return messageRepository.findMessagesByChannel(channel);
     }
+
 }
