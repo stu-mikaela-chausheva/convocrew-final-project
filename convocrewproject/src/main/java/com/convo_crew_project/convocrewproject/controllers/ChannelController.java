@@ -1,8 +1,11 @@
 package com.convo_crew_project.convocrewproject.controllers;
 
+import com.convo_crew_project.convocrewproject.dto.CreateChannelRequest;
 import com.convo_crew_project.convocrewproject.entities.Channel;
+import com.convo_crew_project.convocrewproject.entities.User;
 import com.convo_crew_project.convocrewproject.http.HttpResponse;
 import com.convo_crew_project.convocrewproject.services.ChannelService;
+import com.convo_crew_project.convocrewproject.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,31 +20,28 @@ import java.util.HashMap;
 public class ChannelController {
 
     private ChannelService channelService;
+    private UserService userService;
 
-    public ChannelController(ChannelService channelService) {
+    public ChannelController(ChannelService channelService, UserService userService) {
         this.channelService = channelService;
+        this.userService = userService;
     }
 
     @PostMapping("/channel")
-    public ResponseEntity<?> createNewChannel(@RequestBody Channel channel) {
-        HashMap<String, Object> response = new HashMap<>();
+    public ResponseEntity<?> createNewChannel(@RequestBody CreateChannelRequest request
+    ) {
 
-        if(this.channelService.createChannel(channel)) {
+        if(channelService.createChannel(request)) {
             // success if all data is provided correct
-//            return HttpResponse.success()
-//                    .withMessage("Channel created successfully")
-//                    .build();
-
-            response.put("message", "Channel created");
-            return new ResponseEntity<Object>(response, HttpStatus.valueOf(200));
+            return HttpResponse.success()
+                    .withMessage("Channel created successfully")
+                    .build();
         }
         // error if smth went wrong
-//        return HttpResponse.error()
-//                .withMessage("Channel not created. Try again!")
-//                .build();
+        return HttpResponse.error()
+                .withMessage("Channel not created. Try again!")
+                .build();
 
-        response.put("message", "Channel not created");
-        return new ResponseEntity<Object>(response, HttpStatus.valueOf(400 ));
     }
 
     @GetMapping("/channels")

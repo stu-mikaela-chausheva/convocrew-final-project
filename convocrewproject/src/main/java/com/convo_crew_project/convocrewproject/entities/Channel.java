@@ -15,7 +15,7 @@ public class Channel {
     @Column(name="is_private")
     private boolean isPrivate;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
