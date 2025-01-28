@@ -1,49 +1,48 @@
-import { MessageService } from './services/message.service';
-import {HttpClientModule, HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-// import { ChannelService } from './services/channel.service';
-import { ChannelType } from './models/channel.model';
-import { MessageType } from './models/message.model';
+import { Component, inject, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ChannelService } from './services/channel.service';
+import { ChannelType } from './models/channel.model'; // Channel type model
+import { MessageService } from './services/message.service'; // If you want to fetch messages
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HttpClientModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
 
+//   public channelCollection: ChannelType[] = [];
+//   public selectedChannel: ChannelType | null = null;
 
-  // Добавям си сервиза за работа с customer обекти
-  private messageService = inject(MessageService)
-
-  public channelCollection: ChannelType[] = [];
-  public messageCollection: MessageType[] = [];
-
-  public httpClient = inject(HttpClient);
-
-  public ngOnInit(){
-
-    // this.fetchAllChannels();
-    this.httpClient.get('http://localhost:8328/channels').subscribe((result:any)=>{
-      this.channelCollection = result.data;
-    })
-
-  }
-  // public fetchAllChannels() {
-
-  //   // this.httpClient.get('http://localhost:8328/channels').subscribe((result:any)=>{
-  //   //   this.channelCollection = result.data;
-  //   })
-  // }
+//   private httpClient = inject(HttpClient);  // Inject HttpClient
 
 
-  // public processOnSeeMessages($selectedElement: ChannelType) {
-  //   this.messageService.getAllMessagesByChannel($selectedElement.id!).subscribe((result: any) => {
-  //     this.fetchAllChannels();
-  //   });
-  // }
+//   constructor(
+//     private channelService: ChannelService,  // Injecting ChannelService
+//     private messageService: MessageService,  // You can also use it to fetch messages
+//   ) {}
 
+
+//   ngOnInit() {
+//     this.fetchAllChannels();  // Fetch channels on component initialization
+//   }
+
+//   // Fetching all channels from the backend
+//   fetchAllChannels() {
+//     this.channelService.getAllChannels().subscribe((result: any) => {
+//       this.channelCollection = result.data;  // Save response data to channelCollection
+//     }, error => {
+//       console.error('Error fetching channels', error);
+//     });
+//   }
+
+//   // When a channel is selected, show its messages
+//   viewChannelMessages(channel: ChannelType) {
+//     this.selectedChannel = channel;  // Update selected channel
+//     // Optionally, use the MessageService to fetch messages for the selected channel
+//     this.messageService.getAllMessagesByChannel(channel.id!).subscribe((result: any) => {
+//       console.log(result);  // You can handle the message data here
+//     });
+//   }
 }

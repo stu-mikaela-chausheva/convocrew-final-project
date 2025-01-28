@@ -31,7 +31,7 @@ public class UserChannelRoleController {
         @PostMapping("/{channelId}/addUser")
         public ResponseEntity<?> addUserToChannel(@RequestBody AddUserRequest request,
                 @PathVariable int channelId) {
-  
+
             // Fetch the User from the UserService
             User user = userService.getUserById((long) request.getUserId())
                     .orElse(null); // You can handle empty result by returning null or throwing an exception

@@ -1,15 +1,14 @@
-// import { HttpClient } from '@angular/common/http';
-// import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 
-// @Injectable({
-//   providedIn: "root"
-// })
+@Injectable({
+  providedIn: 'root',  // This makes sure that the service is available throughout your app
+})
+export class ChannelService {
+  private httpClient = inject(HttpClient);
+  private baseUrl = 'http://localhost:8328/channels';
 
-// export class ChannelService{
-//   private httpClient  = inject(HttpClient);
-//   private baseUrl     = 'http://localhost:8328/channels';
-
-//   public getAllChannels() {
-//     return this.httpClient.get(this.baseUrl)
-//   }
-// }
+  public getAllChannels() {
+    return this.httpClient.get(this.baseUrl);
+  }
+}
