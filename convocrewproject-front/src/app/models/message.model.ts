@@ -4,9 +4,7 @@ import { UserType } from './user.model';
 
 export type MessageType = {
   id?: number;
-  text_message: string;
-  channel_id:number;
-  user_id:number;
-  channel?: ChannelType;
-  user?:UserType;
+  textMessage: string;
+  channel: { id: number }; // Nested channel object with only the ID
+  user: { id: number }; // Nested user object with only the ID
 }

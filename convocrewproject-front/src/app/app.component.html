@@ -1,45 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Channel Viewer</title>
-  <link rel="stylesheet" href="app.component.css">
-</head>
-<body>
-  <div class="column channel-list">
-    <ul>
-      <li *ngFor="let channel of channelCollection" (click)="viewChannelMessages(channel)">
-        {{ channel.name }}
-      </li>
-    </ul>
-  </div>
-
-  <div class="column message-viewer" id="message-viewer">
-    <div *ngIf="selectedChannel"> -->
-
-      <!-- <h2>Messages in {{ selectedChannel.name }}</h2> -->
-      <!-- You can loop through the messages if you fetched them -->
-      <!-- <div *ngIf="selectedChannel.messages">
-        <div *ngFor="let message of selectedChannel.messages">
-          <p>{{ message.text_message }}</p>
-        </div>
-      </div>
-      <div *ngIf="!selectedChannel.messages">
-        <p>No messages available.</p>
-      </div>
-    </div>
-    <div *ngIf="!selectedChannel">
-      <p>Click a channel to view messages.</p>
-    </div>
-  </div>
-
-  <script>
-    // This script can be omitted as Angular handles the dynamic content and interaction.
-  </script>
-</body>
-</html> -->
-
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,24 +12,41 @@
 
     <div class="column channel-list">
         <ul>
-            <li onclick="viewChannel('Channel 1')">Channel 1</li>
-            <li onclick="viewChannel('Channel 2')">Channel 2</li>
-            <li onclick="viewChannel('Channel 3')">Channel 3</li>
-            <li onclick="viewChannel('Channel 4')">Channel 4</li>
+          @for(channel of channelCollection; track channel){
+            <!-- <li (click)="proccessOnSeeMessages=()">{{ channelElement.name }}</li> -->
+            <!-- <li>{{ channelElement.name }}</li>
+              -->
+              <li (click)="onChannelClick(channel)">{{ channel.name }}</li>
+          }
         </ul>
     </div>
 
-
     <div class="column message-viewer" id="message-viewer">
-        <div class="messages">
-            <p>Click a channel to view messages. <a href="#" id="friends">Friends</a></p>
+      @if (selectedChannel) {
+        <h2>Messages in {{ selectedChannel.name }}</h2>
+        <ul>
+          @for(message of selectedChannelMessages; track message.id) {
+            <li><strong>{{ message.user.username }}:</strong> {{ message.textMessage }}</li> <!-- Use textMessage instead of content -->
+          }
+        </ul>
+        <!-- Add a text input and send button -->
+        <div class="message-input">
+          <input
+            type="text"
+            [(ngModel)]="newMessageText"
+            placeholder="Type your message..."
+          />
+          <button (click)="sendMessage()">Send</button>
         </div>
+      } @else {
+        <p>Click a channel to view messages. <a href="#" id="friends">Friends</a></p>
+      }
     </div>
 
 
 
 
-    <script>
+    <!-- <script>
         function viewChannel(channelName) {
             const messageViewer = document.getElementById('message-viewer');
             messageViewer.innerHTML = `
@@ -83,6 +58,6 @@
                 </div>
             `;
         }
-    </script>
+    </script> -->
 </body>
 </html>

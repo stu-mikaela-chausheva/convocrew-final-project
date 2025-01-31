@@ -59,7 +59,7 @@ public class MessageController {
 
     }
 
-    @GetMapping("/messages/{channelid}")
+            @GetMapping("/messages/{channelid}")
     public ResponseEntity fetchMessageByChannelID(@PathVariable("channelid") Long channelId) {
         Channel channel = channelService.getChannelById(channelId);
 

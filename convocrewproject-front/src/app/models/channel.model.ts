@@ -1,5 +1,6 @@
 export type ChannelType = {
-  id?: number;
-  name: string;
-  is_active?: boolean;
+  id: number;
+  name?: string;
+  private?: boolean;
+  // private?: boolean;
 }

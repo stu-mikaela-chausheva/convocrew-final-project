@@ -1,14 +1,17 @@
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ChannelType } from '../models/channel.model';
 
 @Injectable({
-  providedIn: 'root',  // This makes sure that the service is available throughout your app
+  providedIn: 'root', // This ensures the service is provided at the root level
 })
 export class ChannelService {
-  private httpClient = inject(HttpClient);
-  private baseUrl = 'http://localhost:8328/channels';
+  private apiUrl = 'http://localhost:8328/channels'; // Replace with your backend API URL
 
-  public getAllChannels() {
-    return this.httpClient.get(this.baseUrl);
+  constructor(private http: HttpClient) {}
+
+  getAllChannels(): Observable<ChannelType[]> {
+    return this.http.get<ChannelType[]>(this.apiUrl);
   }
 }

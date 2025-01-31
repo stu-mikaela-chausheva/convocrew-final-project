@@ -15,4 +15,9 @@ export class MessageService {
   public getAllMessagesByChannel($channel_id: number) {
     return this.httpClient.get<MessageType[]>(`${this.baseUrl}/${$channel_id}`);
   }
+
+
+  public createNewMessage($message : MessageType) {
+    return this.httpClient.post('http://localhost:8328/post/message', $message);
+  }
 }

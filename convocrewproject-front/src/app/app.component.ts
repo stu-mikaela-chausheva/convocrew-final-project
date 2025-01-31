@@ -1,48 +1,77 @@
+import { MessageService } from './services/message.service';
 import { Component, inject, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ChannelService } from './services/channel.service';
-import { ChannelType } from './models/channel.model'; // Channel type model
-import { MessageService } from './services/message.service'; // If you want to fetch messages
+import { ChannelType } from './models/channel.model';
+import { MessageType } from './models/message.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  imports: [FormsModule], // Add FormsModule to the imports array
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  public channelCollection: ChannelType[] = [];
+  public messageCollection : MessageType[] = [];
+  public selectedChannel: ChannelType | null = null;
+  public newMessageText: string = '';
 
-//   public channelCollection: ChannelType[] = [];
-//   public selectedChannel: ChannelType | null = null;
+  private channelService = inject(ChannelService);
+  private messageService = inject(MessageService);
+selectedChannelMessages: any;
 
-//   private httpClient = inject(HttpClient);  // Inject HttpClient
+  public ngOnInit() {
+    this.fetchAllChannels();
+  }
 
+  public fetchAllChannels() {
+    this.channelService.getAllChannels().subscribe((result: any) => {
+      this.channelCollection = result.data;
+    });
+  }
 
-//   constructor(
-//     private channelService: ChannelService,  // Injecting ChannelService
-//     private messageService: MessageService,  // You can also use it to fetch messages
-//   ) {}
+  // Handle channel click event
+  public onChannelClick(channel: ChannelType) {
+    this.selectedChannel = channel; // Set the selected channel
+    this.fetchMessagesForChannel(channel.id); // Fetch messages for the selected channel
+  }
 
+  // Fetch messages for the selected channel
+  private fetchMessagesForChannel(channelId: number) {
+    this.messageService.getAllMessagesByChannel(channelId).subscribe({
+      next: (response: any) => {
+        console.log('API Response:', response); // Log the full API response
+        this.selectedChannelMessages = response.data; // Extract the messages from the response
+      },
+      error: (err) => {
+        console.error('Failed to fetch messages:', err); // Log errors
+        this.selectedChannelMessages = []; // Clear messages on error
+      },
+    });
+  }
+  public sendMessage() {
+    if (!this.selectedChannel || !this.newMessageText.trim()) {
+      return; // Do nothing if no channel is selected or the message is empty
+    }
 
-//   ngOnInit() {
-//     this.fetchAllChannels();  // Fetch channels on component initialization
-//   }
+    const newMessage: MessageType = {
+      textMessage: this.newMessageText,
+      channel: { id: this.selectedChannel.id }, // Only include the ID
+      user: { id: 1 }, // Hardcoded user ID for testing
+    };
 
-//   // Fetching all channels from the backend
-//   fetchAllChannels() {
-//     this.channelService.getAllChannels().subscribe((result: any) => {
-//       this.channelCollection = result.data;  // Save response data to channelCollection
-//     }, error => {
-//       console.error('Error fetching channels', error);
-//     });
-//   }
+    this.messageService.createNewMessage(newMessage).subscribe({
+      next: (response: any) => {
+        console.log('Message sent:', response); // Log the response
+        this.newMessageText = ''; // Clear the input field
+        this.fetchMessagesForChannel(this.selectedChannel!.id); // Refresh the messages
+      },
+      error: (err) => {
+        console.error('Failed to send message:', err); // Log errors
+      },
+    });
+  }
 
-//   // When a channel is selected, show its messages
-//   viewChannelMessages(channel: ChannelType) {
-//     this.selectedChannel = channel;  // Update selected channel
-//     // Optionally, use the MessageService to fetch messages for the selected channel
-//     this.messageService.getAllMessagesByChannel(channel.id!).subscribe((result: any) => {
-//       console.log(result);  // You can handle the message data here
-//     });
-//   }
 }
